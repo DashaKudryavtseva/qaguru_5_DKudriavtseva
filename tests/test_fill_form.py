@@ -1,7 +1,5 @@
 import os
 from selene import browser, have
-from selene import command
-
 
 def test_fill(browser_configuration):
     #открытие страницы
@@ -10,7 +8,6 @@ def test_fill(browser_configuration):
     browser.all('[id^=google_ads][id$=container__]').with_(timeout=3).wait_until(
         have.size_greater_than_or_equal(3)
     )
-    browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
 
     #заполнение полей
     browser.element('#firstName').type('Maria').press_enter()
