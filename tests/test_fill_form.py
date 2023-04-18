@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from selene import browser, have, command
@@ -24,16 +23,17 @@ def test_fill(browser_configuration):
     browser.element(f'.react-datepicker__day--0{"01"}').click()
     browser.element('#subjectsInput').set_value("English").press_enter()
     browser.element('[for ="hobbies-checkbox-1"]').click()
-    browser.element('[for=uploadPicture]').perform(command.js.scroll_into_view)
-
     browser.element('#uploadPicture').set_value(
         str(Path(__file__).parent.joinpath(r'resourses/example.png').absolute())
     )
     browser.element('#currentAddress').type("Sport Street, 140").press_enter()
+    browser.element('#state').perform(command.js.scroll_into_view)
     browser.element('#state').click()
     browser.element('#react-select-3-input').set_value("NCR").press_enter()
     browser.element('#city').click()
     browser.element('#react-select-4-input').set_value("Delhi").press_enter()
+    browser.driver.execute_script("$('footer').hide()")
+    browser.element('[id="submit"]').perform(command.js.scroll_into_view)
     browser.element('[id="submit"]').click()
 
     #сверка данных
